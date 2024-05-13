@@ -9,14 +9,14 @@ void showNum(int num);
 
 
 int main() {
-	  //====================
-	  RCC->AHB1ENR = ((1<<0) | (1<<2));
-	  GPIOC->MODER &= ~(0x3 << 13);       // PC12-13: input   // CHECK
     //====================
+    RCC->AHB1ENR = ((1<<0) | (1<<2));                  // GPIO A,C enable
+    GPIOC->MODER &= (~(0x3<<20) & ~(0x3<<26));         // PC12-13: input  
+	//====================
     int num = 2, last = 0;
     int arr[1000];
     while(1){
-        if((GPIOA->IDR & (1<<12)) == 0){                    // CHECK
+        if((GPIOC->IDR & (1<<13)) == 0){                 
             while(!isPrime(num) || !isPalindrome(num))
                 num++;
             arr[last] = num;
@@ -24,7 +24,7 @@ int main() {
             showNum(num);
             num++;
         }
-        else if((GPIOA->IDR & (1<<13)) == 0){               // CHECK
+        else if((GPIOC->IDR & (1<<10)) == 0){              
             int index = last - 2;
             num = arr[index] + 1;
             last--;
@@ -58,20 +58,18 @@ int isPalindrome(int num) {
         return 0;
 }
 void delay1(){
-	for (unsigned int d = 100000;d!=0;d--)
-	{}
+  for (unsigned int d = 1000000;d!=0;d--)
+  {}
 }
-void delay2(void){
-	for (unsigned int d = 400000;d!=0;d--)
-	{}
+void delay2(){
+  for (unsigned int d = 4000000;d!=0;d--)
+  {}
 }
 void showNum(int num){
-	  
-	  
-		GPIOA->MODER |= (1<<10);            // PA0-6: output    // CHECK
-		
-
-	
+    
+    
+    //GPIOA->MODER |= ((1<<0) | (1<<2)| (1<<4)| (1<<6)| (1<<8)| (1<<10)| (1<<12));      // PA0-6: output   
+    GPIOA->MODER = 0x0000555;
     int count = 0,copy = num;
     while (copy != 0) {
         copy /= 10;
