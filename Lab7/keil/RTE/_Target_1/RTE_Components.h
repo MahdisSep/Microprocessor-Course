@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'lab77' 
+ * Project: 'lab7' 
  * Target:  'Target 1' 
  */
 
