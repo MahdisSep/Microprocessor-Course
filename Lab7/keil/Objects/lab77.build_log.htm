@@ -21,8 +21,8 @@ Target DLL:      UL2CM3.DLL V1.164.9.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-E:\term6\micro\Lab\7\lab7\lab7.uvprojx
-Project File Date:  05/12/2024
+E:\term6\micro\Lab\7\lab77\lab77.uvprojx
+Project File Date:  05/13/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
@@ -35,54 +35,71 @@ main.c(7): warning: a function declaration without a prototype is deprecated in 
     7 | void delay2();
       |            ^
       |             void
-main.c(11): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   11 | int main() {
-      |         ^
-      |          void
-main.c(14): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   14 |           GPIOC->MODER &= ~(0x3 << 13);       // PC12-13: input   // CHECK
-      |                        ~~ ^~~~~~~~~~~~
-main.c(16): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   16 |     int num = 2, last = 0;
-      |         ^
-main.c(34): warning: 'return' will never be executed [-Wunreachable-code-return]
-   34 |     return 0;
-      |            ^
-main.c(60): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   60 | void delay1(){
+main.c(8): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+    8 | void setout();
       |            ^
       |             void
-main.c(60): warning: no previous prototype for function 'delay1' [-Wmissing-prototypes]
-   60 | void delay1(){
+main.c(12): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   12 | int main() {
+      |         ^
+      |          void
+main.c(23): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   23 |     int num = 2, last = 0;
+      |         ^
+main.c(42): warning: 'return' will never be executed [-Wunreachable-code-return]
+   42 |     return 0;
+      |            ^
+main.c(44): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   44 | void setout(){
+      |            ^
+      |             void
+main.c(44): warning: no previous prototype for function 'setout' [-Wmissing-prototypes]
+   44 | void setout(){
+      |      ^
+main.c(8): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
+    8 | void setout();
+      |      ^      
+      |             void
+main.c(76): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   76 | void delay1(){
+      |            ^
+      |             void
+main.c(76): warning: no previous prototype for function 'delay1' [-Wmissing-prototypes]
+   76 | void delay1(){
       |      ^
 main.c(6): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
     6 | void delay1();
       |      ^      
       |             void
-main.c(64): warning: no previous prototype for function 'delay2' [-Wmissing-prototypes]
-   64 | void delay2(void){
+main.c(80): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   80 | void delay2(){
+      |            ^
+      |             void
+main.c(80): warning: no previous prototype for function 'delay2' [-Wmissing-prototypes]
+   80 | void delay2(){
       |      ^
 main.c(7): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
     7 | void delay2();
       |      ^      
       |             void
-main.c(75): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   75 |     int count = 0,copy = num;
-      |         ^
-main.c(22): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   22 |             arr[last] = num;
+main.c(154): warning: no newline at end of file [-Wnewline-eof]
+  154 | }
+      |  ^
+main.c(30): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   30 |             arr[last] = num;
       |             ^~~
-main.c(29): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   29 |             num = arr[index] + 1;
+main.c(37): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   37 |             num = arr[index] + 1;
       |                   ^~~
-main.c(31): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   31 |             showNum(arr[index]);
+main.c(39): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   39 |             showNum(arr[index]);
       |                     ^~~
-13 warnings generated.
+16 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=1228 RO-data=420 RW-data=0 ZI-data=1632  
-".\Objects\lab7.axf" - 0 Error(s), 13 Warning(s).
+Program Size: Code=1376 RO-data=420 RW-data=0 ZI-data=1632  
+FromELF: creating hex file...
+".\Objects\lab77.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -113,7 +130,7 @@ Package Vendor: Keil
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f401xe.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

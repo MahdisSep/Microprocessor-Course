@@ -5,20 +5,28 @@ int isPrime(int num);
 int isPalindrome(int num);
 void delay1();
 void delay2();
+void setout();
 void showNum(int num);
 
 
 int main() {
     //====================
-    RCC->AHB1ENR = ((1<<0) | (1<<2));                  // GPIO A,C enable
-    GPIOC->MODER &= (~(0x3<<20) & ~(0x3<<26));         // PC12-13: input  
+    RCC->AHB1ENR = ((1U<<0) | (1U<<2) | (1U<<1));    // GPIO A,C enable
+    //GPIOC->MODER &= (~(0x3<<20));                    // PC12-13: input  
+		//GPIOC->MODER &= (~(0x3<<26));
+	
+		GPIOC->MODER = 0X00000000;
+	  GPIOC->PUPDR = 0X00000000;
+	
+	  setout();
 	//====================
     int num = 2, last = 0;
     int arr[1000];
     while(1){
-        if((GPIOC->IDR & (1<<13)) == 0){                 
-            while(!isPrime(num) || !isPalindrome(num))
+        if(1){                 
+            while(!isPrime(num) || !isPalindrome(num)){
                 num++;
+						}
             arr[last] = num;
             last++;
             showNum(num);
@@ -33,7 +41,15 @@ int main() {
     }
     return 0;
 }
-
+void setout(){
+		GPIOA->MODER |= (1<<0);
+		GPIOA->MODER |= (1<<2);
+		GPIOA->MODER |= (1<<4);
+		GPIOA->MODER |= (1<<6);
+		GPIOA->MODER |= (1<<8);
+		GPIOA->MODER |= (1<<10);
+		GPIOA->MODER |= (1<<12);	
+}
 int isPrime(int num) {
     int i;
     if (num < 2)
@@ -58,18 +74,19 @@ int isPalindrome(int num) {
         return 0;
 }
 void delay1(){
-  for (unsigned int d = 1000000;d!=0;d--)
+  for (unsigned int d = 10000;d!=0;d--)
   {}
 }
 void delay2(){
-  for (unsigned int d = 4000000;d!=0;d--)
+  for (unsigned int d = 40000;d!=0;d--)
   {}
 }
 void showNum(int num){
     
     
-    //GPIOA->MODER |= ((1<<0) | (1<<2)| (1<<4)| (1<<6)| (1<<8)| (1<<10)| (1<<12));      // PA0-6: output   
-    GPIOA->MODER = 0x0000555;
+    //GPIOA->MODER |= ((1<<0) | (1<<2) | (1<<4)| (1<<6) | (1<<8) | (1<<10) | (1<<12));      // PA0-6: output   
+    //GPIOA->MODER &= (~(1<<1) & ~(1<<3) & ~(1<<5) & ~(1<<7) & ~(1<<9) & ~(1<<11) & ~(1<<13)); 
+
     int count = 0,copy = num;
     while (copy != 0) {
         copy /= 10;
@@ -81,44 +98,54 @@ void showNum(int num){
         
         switch (digit) {
             case 0:
-                GPIOA->ODR = 0x3f;
+                GPIOA->ODR |=(7<<5);
                 delay1();
+						    GPIOA->ODR &= 0xFF00;
                 break;
             case 1:
-                GPIOA->ODR = 0x06;
+                GPIOA->ODR |=(575<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 2:
-                GPIOA->ODR = 0x5b;
+                GPIOA->ODR |=(75<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 3:
-                GPIOA->ODR = 0x4f;
+                GPIOA->ODR |= (27<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 4:
-                GPIOA->ODR = 0x66;
+                GPIOA->ODR |=(563<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 5:
-                GPIOA->ODR = 0x6d;
+                GPIOA->ODR |=(147<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 6:
-                GPIOA->ODR = 0x7d;
+                GPIOA->ODR |=(131<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 7:
-                GPIOA->ODR = 0x07;
+                GPIOA->ODR |=(63<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 8:
-                GPIOA->ODR = 0x7f;
+                GPIOA->ODR |=(3<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
             case 9:
-                GPIOA->ODR = 0x67;
+                GPIOA->ODR |=(19<<5);
                 delay1();
+								GPIOA->ODR &= 0xFF00;
                 break;
         }    
     }
