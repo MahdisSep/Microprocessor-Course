@@ -5,13 +5,11 @@ void showNumber(int num);
 void delay(int q);
 
 int main(void){
-	RCC->AHB1ENR = ((1<<0) | (1<<1)); // port A,B enable
+	RCC->AHB1ENR = ((1<<0) | (1<<1));  // port A,B enable
 	GPIOB->MODER = 0X00000000;         // port B: input
 	GPIOA->MODER |= ((1<<10) | (1<<12) | (1<<14)  | (1<<16)  | (1<<18) | (1<<20) | (1<<22) | (1<<24) | (1<<26) | (1<<28));   // port A: output
-
-	int num=1;
+	int num=2;
 	while(1){
-
 		if((GPIOB->IDR & (1<<0)) == 0){
 			num++;
 			while(1){
@@ -19,8 +17,6 @@ int main(void){
           break;
         num+=1;
 			}
-		showNumber(num);
-	  delay(1);
 		}
 		else if((GPIOB->IDR & (1<<1)) == 0){
 			num-=1;
@@ -29,9 +25,9 @@ int main(void){
 					break;
 				num-=1;
 			}
-	  showNumber(num);
-	  delay(1);
 		}
+		showNumber(num);
+	  delay(2);
   }
   return 0;
  }
