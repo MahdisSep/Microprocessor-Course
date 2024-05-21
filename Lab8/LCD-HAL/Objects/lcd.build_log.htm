@@ -45,70 +45,110 @@ main.c(11): warning: no previous extern declaration for non-static variable 'msg
 main.c(11): note: declare 'static' if the variable is not intended to be used outside of this translation unit
    11 | char msg[] = "abcdefghijklmnopqrstuwxyz";
       | ^
-main.c(12): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   12 | void GPIO_init(){
+main.c(13): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   13 | void GPIO_init(){
       |               ^
       |                void
-main.c(12): warning: no previous prototype for function 'GPIO_init' [-Wmissing-prototypes]
-   12 | void GPIO_init(){
+main.c(13): warning: no previous prototype for function 'GPIO_init' [-Wmissing-prototypes]
+   13 | void GPIO_init(){
       |      ^
-main.c(12): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   12 | void GPIO_init(){
+main.c(13): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   13 | void GPIO_init(){
       | ^
       | static 
-main.c(33): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   33 | void msg_show(){
+main.c(23): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   23 | void EXTI15_10_IRQHandler() { 
+      |                          ^
+      |                           void
+main.c(25): warning: // comments are not allowed in this language [-Wcomment]
+   25 |                 //SystemCoreClock += 100;
+      |                 ^
+main.c(23): warning: no previous prototype for function 'EXTI15_10_IRQHandler' [-Wmissing-prototypes]
+   23 | void EXTI15_10_IRQHandler() { 
+      |      ^
+main.c(23): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   23 | void EXTI15_10_IRQHandler() { 
+      | ^
+      | static 
+main.c(31): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   31 | void EXTI9_5_IRQHandler() { 
+      |                        ^
+      |                         void
+main.c(31): warning: no previous prototype for function 'EXTI9_5_IRQHandler' [-Wmissing-prototypes]
+   31 | void EXTI9_5_IRQHandler() { 
+      |      ^
+main.c(31): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   31 | void EXTI9_5_IRQHandler() { 
+      | ^
+      | static 
+main.c(70): warning: 'return' will never be executed [-Wunreachable-code-return]
+   70 |         return 0;
+      |                ^
+main.c(72): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   72 | void msg_show(){
       |              ^
       |               void
-main.c(36): warning: implicit conversion changes signedness: 'unsigned int' to 'int' [-Wsign-conversion]
-   36 |                         min = strlen(msg);
+main.c(75): warning: implicit conversion changes signedness: 'unsigned int' to 'int' [-Wsign-conversion]
+   75 |                         min = strlen(msg);
       |                             ~ ^~~~~~~~~~~
-main.c(48): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
-   48 |                         for(int i=0; i<= strlen(msg)-16; i++){
+main.c(87): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+   87 |                         for(int i=0; i<= strlen(msg)-16; i++){
       |                             ^
-main.c(48): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
-main.c(41): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
-   41 |         char str_to_show[17];
+main.c(87): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+main.c(80): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+   80 |         char str_to_show[17];
       |              ^
-main.c(34): warning: variable 'min' set but not used [-Wunused-but-set-variable]
-   34 |         int min;
+main.c(73): warning: variable 'min' set but not used [-Wunused-but-set-variable]
+   73 |         int min;
       |             ^
-main.c(33): warning: no previous prototype for function 'msg_show' [-Wmissing-prototypes]
-   33 | void msg_show(){
+main.c(72): warning: no previous prototype for function 'msg_show' [-Wmissing-prototypes]
+   72 | void msg_show(){
       |      ^
 main.c(7): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
     7 | void msg_show();
       |      ^        
       |               void
-main.c(48): warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
-   48 |                         for(int i=0; i<= strlen(msg)-16; i++){
+main.c(87): warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+   87 |                         for(int i=0; i<= strlen(msg)-16; i++){
       |                                      ~^  ~~~~~~~~~~~~~~
-main.c(59): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   59 | void sysclk_show(){
+main.c(98): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   98 | void sysclk_show(){
       |                 ^
       |                  void
-main.c(61): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
-   61 |         unsigned int copy = SystemCoreClock;
+main.c(100): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+  100 |         unsigned int copy = SystemCoreClock;
       |                      ^
-main.c(59): warning: no previous prototype for function 'sysclk_show' [-Wmissing-prototypes]
-   59 | void sysclk_show(){
+main.c(98): warning: no previous prototype for function 'sysclk_show' [-Wmissing-prototypes]
+   98 | void sysclk_show(){
       |      ^
 main.c(8): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
     8 | void sysclk_show();
       |      ^           
       |                  void
-main.c(49): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
-   49 |                                         strncpy(str_to_show, msg+base, 16);
+main.c(51): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   51 |           SYSCFG->EXTICR[3] |= (2 << 4);      // EXTI13: PC13
+      |           ^~~~~~~~~~~~~~
+C:/Users/Shahbazi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h(774): note: expanded from macro 'SYSCFG'
+  774 | #define SYSCFG              ((SYSCFG_TypeDef *) SYSCFG_BASE)
+      |                             ^
+main.c(56): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   56 |                 SYSCFG->EXTICR[2] |= (2 << 0);      // EXTI13: PC13
+      |                 ^~~~~~~~~~~~~~
+C:/Users/Shahbazi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h(774): note: expanded from macro 'SYSCFG'
+  774 | #define SYSCFG              ((SYSCFG_TypeDef *) SYSCFG_BASE)
+      |                             ^
+main.c(88): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
+   88 |                                         strncpy(str_to_show, msg+base, 16);
       |                                                              ^~~
-main.c(50): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   50 |                                         str_to_show[16] = '\0';
+main.c(89): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   89 |                                         str_to_show[16] = '\0';
       |                                         ^~~~~~~~~~~
-19 warnings generated.
+27 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=10572 RO-data=1008 RW-data=36 ZI-data=1652  
+Program Size: Code=10884 RO-data=1008 RW-data=36 ZI-data=1652  
 FromELF: creating hex file...
-".\Objects\lcd.axf" - 0 Error(s), 19 Warning(s).
+".\Objects\lcd.axf" - 0 Error(s), 27 Warning(s).
 
 <h2>Software Packages used:</h2>
 

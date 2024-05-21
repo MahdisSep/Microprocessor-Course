@@ -9,6 +9,7 @@ void sysclk_show();
 void delay(int ms);
 
 char msg[] = "abcdefghijklmnopqrstuwxyz";
+
 void GPIO_init(){
 	SystemCoreClockUpdate();
 	HAL_Init();
@@ -18,15 +19,53 @@ void GPIO_init(){
 	__HAL_RCC_GPIOC_CLK_ENABLE();
 	
 }
+
+void EXTI15_10_IRQHandler() { 
+    SystemCoreClockUpdate();
+		//SystemCoreClock += 100;
+	
+    EXTI->PR |= (1 << 13); 
+    NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
+} 
+
+void EXTI9_5_IRQHandler() { 
+    SystemCoreClockUpdate();
+		//SystemCoreClock -= 100;
+	
+    EXTI->PR |= (1 << 8); 
+    NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
+} 
+
+
 int main(void)
 {
+	//==============================
+	
+	  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOCEN; 
+    RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; 
+ 
+	  //GPIOA->MODER |= 1 << 10;            // PA5: OUTPUT
+  	GPIOC->MODER &= 3 << 26;            // PC13: INPUT
+		GPIOC->MODER &= 3 << 16;            // PC8: INPUT
+	  
+	  SYSCFG->EXTICR[3] |= (2 << 4);      // EXTI13: PC13
+    EXTI->FTSR |= (1 << 13);            // falling 
+    EXTI->IMR |= (1 << 13);             // clear mask
+    NVIC_EnableIRQ(EXTI15_10_IRQn); 
+		
+		SYSCFG->EXTICR[2] |= (2 << 0);      // EXTI13: PC13
+    EXTI->FTSR |= (1 << 8);            // falling 
+    EXTI->IMR |= (1 << 8);             // clear mask
+    NVIC_EnableIRQ(EXTI9_5_IRQn); 
+	
 
+	//==============================
 	GPIO_init();
 	LCD_Init();
+	while(1){
 	sysclk_show();
 	msg_show();
-
-	
+	}
 
 	return 0;
 }
@@ -60,7 +99,7 @@ void sysclk_show(){
 	SystemCoreClockUpdate();
 	unsigned int copy = SystemCoreClock;
 	char str[20];
-	sprintf(str, "%d", copy);
+	sprintf(str, "%d", copy); // tmp -> copy
 	LCD_Puts(0,0, str);
 }
 
