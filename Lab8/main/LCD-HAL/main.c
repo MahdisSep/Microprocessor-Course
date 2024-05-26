@@ -55,11 +55,10 @@ void EXTI15_10_IRQHandler() {   // set pll N, M, P to increace the frequency in 
         break;
 }
 
-		RCC->CR |= RCC_CR_PLLON;
-		while((RCC->CR & RCC_CR_PLLRDY) == 0);
-		RCC->CFGR |= (RCC_CFGR_SW_PLL | (4<<RCC_CFGR_PPRE1_Pos));
-		while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
-		SystemCoreClockUpdate();
+		RCC->CR |= RCC_CR_PLLON; // (1<<24)
+		while((RCC->CR & RCC_CR_PLLRDY) == 0); // wait for PLL READY
+		RCC->CFGR |= (RCC_CFGR_SW_PLL | (4<<RCC_CFGR_PPRE1_Pos)); 
+		while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL); // wait for setting the clock sourse
 	
     EXTI->PR |= (1 << 13); 
     NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
@@ -90,11 +89,10 @@ void EXTI9_5_IRQHandler() {     // set pll N, M, P to decreace the frequency in 
 		
 }
 
-		RCC->CR |= RCC_CR_PLLON;
-		while((RCC->CR & RCC_CR_PLLRDY) == 0);
-		RCC->CFGR |= (RCC_CFGR_SW_PLL | (4<<RCC_CFGR_PPRE1_Pos));
-		while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
-		SystemCoreClockUpdate();
+		RCC->CR |= RCC_CR_PLLON; // (1<<24)
+		while((RCC->CR & RCC_CR_PLLRDY) == 0); // wait for PLL READY
+		RCC->CFGR |= (RCC_CFGR_SW_PLL | (4<<RCC_CFGR_PPRE1_Pos)); 
+		while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL); // wait for setting the clock sourse
 	
     EXTI->PR |= (1 << 8); 
     NVIC_ClearPendingIRQ(EXTI9_5_IRQn); 
