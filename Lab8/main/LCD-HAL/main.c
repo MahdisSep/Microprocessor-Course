@@ -11,23 +11,19 @@ void delay(int ms);
 char msg[] = "you see how im wasting my time?";
 
 void GPIO_init(){
-    SystemCoreClockUpdate();
-
-
-   RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;
-
+		SystemCoreClockUpdate();
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;
+		RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; 
     
-    GPIOC->MODER &= ~(0x3 << (26)); 
-    GPIOC->MODER &= ~(0x3 << (16)); 
+    GPIOC->MODER &= ~(0x3 << (26));       // decrease the frequency push button
+    GPIOC->MODER &= ~(0x3 << (16));       // increase the frequency push button
 
-    
-    SYSCFG->EXTICR[3] |= (0x2 << 4 );
+    SYSCFG->EXTICR[3] |= (0x2 << 4 );     // interrupt for increase
     EXTI->FTSR |= (1 << 13);                   
     EXTI->IMR |= (1 << 13);                    
     NVIC_EnableIRQ(EXTI15_10_IRQn);            
-
     
-    SYSCFG->EXTICR[2] |= (0x2 << 0); 
+    SYSCFG->EXTICR[2] |= (0x2 << 0);      // interrupt for decrease
     EXTI->FTSR |= (1 << 8);                      
     EXTI->IMR |= (1 << 8);                       
     NVIC_EnableIRQ(EXTI9_5_IRQn);              
@@ -35,7 +31,7 @@ void GPIO_init(){
     HAL_Init();
 }
 
-void EXTI15_10_IRQHandler() { 
+void EXTI15_10_IRQHandler() {   // set pll N, M, P to increace the frequency in 6 different stages
     SystemCoreClockUpdate();
 		FLASH->ACR = 2;
 		switch (SystemCoreClock) {
@@ -69,7 +65,7 @@ void EXTI15_10_IRQHandler() {
     NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
 } 
 
-void EXTI9_5_IRQHandler() {
+void EXTI9_5_IRQHandler() {     // set pll N, M, P to decreace the frequency in 6 different stages
 	  SystemCoreClockUpdate();
 		FLASH->ACR = 2;
 		switch (SystemCoreClock) {
@@ -83,7 +79,7 @@ void EXTI9_5_IRQHandler() {
         RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (288<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
         break;
 		case 56000000:
-        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (224<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (368<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
         break;
 		case 66000000:
         RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (224<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
@@ -101,38 +97,17 @@ void EXTI9_5_IRQHandler() {
 		SystemCoreClockUpdate();
 	
     EXTI->PR |= (1 << 8); 
-    NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
+    NVIC_ClearPendingIRQ(EXTI9_5_IRQn); 
 } 
 
 
 int main(void)
 {
-	//==============================
-	
-	  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOCEN; 
-    RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; 
- 
-	  //GPIOA->MODER |= 1 << 10;            // PA5: OUTPUT
-  	GPIOC->MODER &= 3 << 26;            // PC13: INPUT
-		GPIOC->MODER &= 3 << 16;            // PC8: INPUT
-	  
-	  SYSCFG->EXTICR[3] |= (2 << 4);      // EXTI13: PC13
-    EXTI->FTSR |= (1 << 13);            // falling 
-    EXTI->IMR |= (1 << 13);             // clear mask
-    NVIC_EnableIRQ(EXTI15_10_IRQn); 
-		
-		SYSCFG->EXTICR[2] |= (2 << 0);      // EXTI13: PC13
-    EXTI->FTSR |= (1 << 8);            // falling 
-    EXTI->IMR |= (1 << 8);             // clear mask
-    NVIC_EnableIRQ(EXTI9_5_IRQn); 
-	
-
-	//==============================
 	GPIO_init();
 	LCD_Init();
 	while(1){
-	sysclk_show();
-	msg_show();
+	sysclk_show(); // function to show sysclk in the first line
+	msg_show();    // function to show scrolling in the second line
 	}
 
 	return 0;
@@ -149,21 +124,21 @@ void msg_show(){
 	int base = 0;
 	if(strlen(msg) <= 16){
 			LCD_Puts(0,1, msg);
-			delay(500);
+			delay(300);
 	}
 	else{
-			for(int i=0; i<= strlen(msg)-16; i++){
+			for(int i=0; i<= strlen(msg)-16; i++){   // operations to shift the msg to left
 					strncpy(str_to_show, msg+base, 16);
 					str_to_show[16] = '\0';
 					LCD_Puts(0,1, str_to_show);
-					delay(500);
+					delay(300);
 					base++;
 			}	
 		}
 }
 
 
-void sysclk_show(){
+void sysclk_show(){  // function to show sysclk in the first line
 	SystemCoreClockUpdate();
 	unsigned int copy = SystemCoreClock;
 	char str[20];
@@ -175,7 +150,6 @@ void delay(int ms){
 	volatile int i = 0;
 	for(i=0; i < ms*1000; i++);
 }
-
 
 void SysTick_Handler(void){
   HAL_IncTick();
