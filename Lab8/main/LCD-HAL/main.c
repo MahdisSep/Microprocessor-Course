@@ -8,29 +8,97 @@ void msg_show();
 void sysclk_show();
 void delay(int ms);
 
-char msg[] = "abcdefghijklmnopqrstuwxyz";
+char msg[] = "you see how im wasting my time?";
 
 void GPIO_init(){
-	SystemCoreClockUpdate();
-	HAL_Init();
-	
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	__HAL_RCC_GPIOC_CLK_ENABLE();
-	
+    SystemCoreClockUpdate();
+
+
+   RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;
+
+    
+    GPIOC->MODER &= ~(0x3 << (26)); 
+    GPIOC->MODER &= ~(0x3 << (16)); 
+
+    
+    SYSCFG->EXTICR[3] |= (0x2 << 4 );
+    EXTI->FTSR |= (1 << 13);                   
+    EXTI->IMR |= (1 << 13);                    
+    NVIC_EnableIRQ(EXTI15_10_IRQn);            
+
+    
+    SYSCFG->EXTICR[2] |= (0x2 << 0); 
+    EXTI->FTSR |= (1 << 8);                      
+    EXTI->IMR |= (1 << 8);                       
+    NVIC_EnableIRQ(EXTI9_5_IRQn);              
+
+    HAL_Init();
 }
 
 void EXTI15_10_IRQHandler() { 
     SystemCoreClockUpdate();
-		//SystemCoreClock += 100;
+		FLASH->ACR = 2;
+		switch (SystemCoreClock) {
+    case 16000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (208<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+    case 26000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (288<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 36000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (368<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 46000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (224<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 56000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (264<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 66000000:
+        RCC->PLLCFGR = (8<<RCC_PLLCFGR_PLLM_Pos) | (228<<RCC_PLLCFGR_PLLN_Pos) | (2<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+}
+
+		RCC->CR |= RCC_CR_PLLON;
+		while((RCC->CR & RCC_CR_PLLRDY) == 0);
+		RCC->CFGR |= (RCC_CFGR_SW_PLL | (4<<RCC_CFGR_PPRE1_Pos));
+		while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
+		SystemCoreClockUpdate();
 	
     EXTI->PR |= (1 << 13); 
     NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
 } 
 
-void EXTI9_5_IRQHandler() { 
-    SystemCoreClockUpdate();
-		//SystemCoreClock -= 100;
+void EXTI9_5_IRQHandler() {
+	  SystemCoreClockUpdate();
+		FLASH->ACR = 2;
+		switch (SystemCoreClock) {
+    case 26000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (208<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+    case 36000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (208<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 46000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (288<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 56000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (224<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		case 66000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (224<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
+				break;
+		case 76000000:
+        RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (264<<RCC_PLLCFGR_PLLN_Pos) | (1<<RCC_PLLCFGR_PLLP_Pos);
+        break;
+		
+}
+
+		RCC->CR |= RCC_CR_PLLON;
+		while((RCC->CR & RCC_CR_PLLRDY) == 0);
+		RCC->CFGR |= (RCC_CFGR_SW_PLL | (4<<RCC_CFGR_PPRE1_Pos));
+		while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
+		SystemCoreClockUpdate();
 	
     EXTI->PR |= (1 << 8); 
     NVIC_ClearPendingIRQ(EXTI15_10_IRQn); 
@@ -99,10 +167,9 @@ void sysclk_show(){
 	SystemCoreClockUpdate();
 	unsigned int copy = SystemCoreClock;
 	char str[20];
-	sprintf(str, "%d", copy); // tmp -> copy
+	sprintf(str, "%d", copy); 
 	LCD_Puts(0,0, str);
 }
-
 
 void delay(int ms){
 	volatile int i = 0;
