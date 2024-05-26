@@ -1,0 +1,181 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.39.0.0
+Copyright (C) 2023 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: mbn shbz, bsht, LIC=0VRJ7-EIVDB-TLHCD-8V6ND-4TU5Q-FG30R
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.39.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.21
+Assembler:       Armasm.exe V6.21
+Linker/Locator:  ArmLink.exe V6.21
+Library Manager: ArmAr.exe V6.21
+Hex Converter:   FromElf.exe V6.21
+CPU DLL:         SARMCM3.DLL V5.39.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.2.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+E:\term6\micro\Lab\8\bonus\LCD-HAL\lcd.uvprojx
+Project File Date:  05/26/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+main.c(3): warning: In file included from...
+./LCD16x2Lib/LCD.h(12): warning: // comments are not allowed in this language [-Wcomment]
+   12 | //#include "gpio.h"
+      | ^
+main.c(8): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+    8 | void print_msg();
+      |               ^
+      |                void
+main.c(10): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   10 | void GPIO_init();
+      |               ^
+      |                void
+main.c(13): warning: no previous extern declaration for non-static variable 'msg' [-Wmissing-variable-declarations]
+   13 | char msg[] = "Hello World!! This is LAB 8...";
+      |      ^
+main.c(13): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   13 | char msg[] = "Hello World!! This is LAB 8...";
+      | ^
+main.c(30): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   30 | void print_msg(){
+      |               ^
+      |                void
+main.c(34): warning: implicit conversion changes signedness: 'unsigned int' to 'int' [-Wsign-conversion]
+   34 |                         min = strlen(msg);
+      |                             ~ ^~~~~~~~~~~
+main.c(46): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+   46 |                         for(int i=0; i<= strlen(msg)-16; i++){
+      |                             ^
+main.c(46): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+main.c(39): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+   39 |         char str[17];
+      |              ^
+main.c(32): warning: variable 'min' set but not used [-Wunused-but-set-variable]
+   32 |         int min;
+      |             ^
+main.c(30): warning: no previous prototype for function 'print_msg' [-Wmissing-prototypes]
+   30 | void print_msg(){
+      |      ^
+main.c(8): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
+    8 | void print_msg();
+      |      ^         
+      |                void
+main.c(46): warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+   46 |                         for(int i=0; i<= strlen(msg)-16; i++){
+      |                                      ~^  ~~~~~~~~~~~~~~
+main.c(57): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   57 | void print_persian_msg(){
+      |                       ^
+      |                        void
+main.c(59): warning: // comments are not allowed in this language [-Wcomment]
+   59 |         //Define Custom Chars
+      |         ^
+main.c(137): warning: unused variable 'Ye' [-Wunused-variable]
+  137 |         uint8_t Ye[8] = {
+      |                 ^~
+main.c(185): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+  185 | void GPIO_init(){
+      |               ^
+      |                void
+main.c(185): warning: no previous prototype for function 'GPIO_init' [-Wmissing-prototypes]
+  185 | void GPIO_init(){
+      |      ^
+main.c(10): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
+   10 | void GPIO_init();
+      |      ^         
+      |                void
+main.c(47): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
+   47 |                                         strncpy(str, msg+startPoint , 16);
+      |                                                      ^~~
+main.c(48): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   48 |                                         str[16] = '\0';
+      |                                         ^~~
+19 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=3752 RO-data=452 RW-data=12 ZI-data=1652  
+FromELF: creating hex file...
+".\Objects\lcd.axf" - 0 Error(s), 19 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM::CMSIS@5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
+                Keil::STM32F4xx_DFP@2.17.1
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+   * Component: STM32Cube Framework Version: 1.0.0
+   * Component: Classic Version: 1.8.1
+   * Component: Common Version: 1.8.1
+   * Component: Cortex Version: 1.8.1
+   * Component: GPIO Version: 1.8.1
+   * Component: PWR Version: 1.8.1
+   * Component: RCC Version: 1.8.1
+   * Component: Startup Version: 2.6.3
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/STM32F401RETx
+  ./RTE/_Target_1
+  C:/Users/Shahbazi/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/Shahbazi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+  C:/Users/Shahbazi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/STM32F4xx_HAL_Driver/Inc
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ::Device:STM32Cube Framework(API)@1.0.0
+
+   * Component: ARM::CMSIS:CORE@5.6.0
+
+   * Component: Keil::Device:STM32Cube Framework:Classic@1.8.1
+      Include file:  CMSIS/Driver/Config/RTE_Device.h
+      Source file:   MDK/Templates_LL/Src/main.c
+      Include file:  MDK/Templates/Inc/stm32f4xx_it.h
+      Include file:  MDK/Templates_LL/Inc/main.h
+      Include file:  MDK/Templates/Inc/stm32f4xx_hal_conf.h
+      Source file:   MDK/Templates/Src/stm32f4xx_it.c
+      Source file:   MDK/Templates/Src/stm32f4xx_hal_msp.c
+      Include file:  MDK/Templates/Inc/main.h
+      Source file:   MDK/Templates/Src/main.c
+
+   * Component: Keil::Device:STM32Cube HAL:Common@1.8.1
+      Include file:  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+
+   * Component: Keil::Device:STM32Cube HAL:Cortex@1.8.1
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+
+   * Component: Keil::Device:STM32Cube HAL:GPIO@1.8.1
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+
+   * Component: Keil::Device:STM32Cube HAL:PWR@1.8.1
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+
+   * Component: Keil::Device:STM32Cube HAL:RCC@1.8.1
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+
+   * Component: Keil::Device:Startup@2.6.3
+      Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
+      Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
+      Source file:   MDK/Device/Source/ARM/STM32F401xx_OPT.s
+      Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f401xe.s
+      Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>
