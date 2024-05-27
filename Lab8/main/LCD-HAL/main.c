@@ -34,6 +34,7 @@ void GPIO_init(){
 void EXTI15_10_IRQHandler() {   // set pll N, M, P to increace the frequency in 6 different stages
     SystemCoreClockUpdate();
 		FLASH->ACR = 2;
+		RCC->CR &= ~RCC_CR_PLLON;
 		switch (SystemCoreClock) {
     case 16000000:
         RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (208<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
@@ -67,6 +68,7 @@ void EXTI15_10_IRQHandler() {   // set pll N, M, P to increace the frequency in 
 void EXTI9_5_IRQHandler() {     // set pll N, M, P to decreace the frequency in 6 different stages
 	  SystemCoreClockUpdate();
 		FLASH->ACR = 2;
+		RCC->CR &= ~RCC_CR_PLLON;
 		switch (SystemCoreClock) {
     case 26000000:
         RCC->PLLCFGR = (16<<RCC_PLLCFGR_PLLM_Pos) | (208<<RCC_PLLCFGR_PLLN_Pos) | (3<<RCC_PLLCFGR_PLLP_Pos);
@@ -122,14 +124,14 @@ void msg_show(){
 	int base = 0;
 	if(strlen(msg) <= 16){
 			LCD_Puts(0,1, msg);
-			delay(300);
+			delay(500);
 	}
 	else{
 			for(int i=0; i<= strlen(msg)-16; i++){   // operations to shift the msg to left
 					strncpy(str_to_show, msg+base, 16);
 					str_to_show[16] = '\0';
 					LCD_Puts(0,1, str_to_show);
-					delay(300);
+					delay(500);
 					base++;
 			}	
 		}
