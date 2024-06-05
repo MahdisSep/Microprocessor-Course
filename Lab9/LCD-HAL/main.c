@@ -4,12 +4,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_COUNT 1000
+#define MAX_COUNT 1000  //1000
+#define STEP 100
+
 char str[20];
 int duty_cycle = 50;
 volatile long int time = 0;
-int mode = 0;
-int blink_period = 1000;
+int mode = 1;
+int blink_period = 100;
 
 void delay(int ms);
 
@@ -33,28 +35,23 @@ void GPIO_init(){
 
 void right() { // increase
 		duty_cycle += 10;
-		TIM2->CCR1 = (TIM2->ARR*duty_cycle) / 100;
+		TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
 } 
 
 void left() {  // decrease   
 		duty_cycle -= 10;
-		TIM2->CCR1 = (TIM2->ARR*duty_cycle) / 100;
+		TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
 } 
 
-
 void up() {
-	 LCD_Puts(10,0,"hi");
-    blink_period += 100;
-    //if (blink_period > 2000) blink_period = 2000;
-	  TIM2->ARR = 400000;  // Adjust timer period for blinking
-		TIM2->CCR1 = 200000;
+    blink_period += STEP;
+		TIM2->CCR1 = (TIM2->ARR + STEP) * duty_cycle /100;
+		TIM2->ARR = TIM2->ARR + STEP;                            // Adjust timer period for blinking
 }
-
 void down() {
-    blink_period -= 100;
-    //if (blink_period < 100) blink_period = 100;
-		TIM2->ARR = TIM2->ARR - 100;  // Adjust timer period for blinking
-		TIM2->CCR1 = TIM2->ARR / 2 - 50;
+    blink_period -= STEP;
+		TIM2->CCR1 = (TIM2->ARR - STEP) * duty_cycle /100;
+		TIM2->ARR = TIM2->ARR - STEP;                           // Adjust timer period for blinking
 }
 
 
@@ -63,7 +60,7 @@ int main(void)
 	GPIO_init();
 	LCD_Init();
 	
-	TIM2->PSC = 16 - 1;
+	TIM2->PSC = 1600 - 1;
 	TIM2->ARR = MAX_COUNT - 1;
 	TIM2->CCMR1 &= ~(3<<0);
 	TIM2->CCMR1 &= ~(7<<4);
@@ -102,28 +99,22 @@ int main(void)
 
             if ((GPIOC->IDR & (1 << 13)) == 0) {  // UP button pressed
                 up();
-                delay(100);  // Debounce delay
             }
             if ((GPIOC->IDR & (1 << 12)) == 0) {  // DOWN button pressed
                 down();
-                delay(100);  // Debounce delay
             }
 						
         } 
 				
 				else {  // Brightness adjustment mode
-						TIM2->CCR1 = 500;
-						TIM2->ARR = MAX_COUNT - 1;
             sprintf(str, "Duty cycle:%d", duty_cycle);
             LCD_Puts(0, 1, str);
 
             if ((GPIOC->IDR & (1 << 13)) == 0) {  // RIGHT button pressed
                 right();
-                delay(100);  // Debounce delay
             }
             if ((GPIOC->IDR & (1 << 12)) == 0) {  // LEFT button pressed
                 left();
-                delay(100);  // Debounce delay
             }
         }
 				

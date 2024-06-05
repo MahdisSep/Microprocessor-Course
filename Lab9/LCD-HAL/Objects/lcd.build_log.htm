@@ -27,7 +27,154 @@ Project File Date:  06/03/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-".\Objects\lcd.axf" - 0 Error(s), 0 Warning(s).
+main.c(3): warning: In file included from...
+./LCD16x2Lib/LCD.h(12): warning: // comments are not allowed in this language [-Wcomment]
+   12 | //#include "gpio.h"
+      | ^
+main.c(7): warning: // comments are not allowed in this language [-Wcomment]
+    7 | #define MAX_COUNT 1000  //1000
+      |                         ^
+main.c(11): warning: no previous extern declaration for non-static variable 'duty_cycle' [-Wmissing-variable-declarations]
+   11 | int duty_cycle = 50;
+      |     ^
+main.c(11): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   11 | int duty_cycle = 50;
+      | ^
+main.c(12): warning: no previous extern declaration for non-static variable 'time' [-Wmissing-variable-declarations]
+   12 | volatile long int time = 0;
+      |                   ^
+main.c(12): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   12 | volatile long int time = 0;
+      |          ^
+main.c(13): warning: no previous extern declaration for non-static variable 'mode' [-Wmissing-variable-declarations]
+   13 | int mode = 1;
+      |     ^
+main.c(13): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   13 | int mode = 1;
+      | ^
+main.c(14): warning: no previous extern declaration for non-static variable 'blink_period' [-Wmissing-variable-declarations]
+   14 | int blink_period = 100;
+      |     ^
+main.c(14): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   14 | int blink_period = 100;
+      | ^
+main.c(18): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   18 | void GPIO_init(){
+      |               ^
+      |                void
+main.c(24): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   24 |     GPIOC->MODER &= ~(0x3 << (26));       // decrease the frequency push button
+      |                  ~~ ^~~~~~~~~~~~~~
+main.c(25): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   25 |     GPIOC->MODER &= ~(0x3 << (24));       // increase the frequency push button
+      |                  ~~ ^~~~~~~~~~~~~~
+main.c(26): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   26 |                 GPIOC->MODER &= ~(0x3 << 22); 
+      |                              ~~ ^~~~~~~~~~~~
+main.c(18): warning: no previous prototype for function 'GPIO_init' [-Wmissing-prototypes]
+   18 | void GPIO_init(){
+      |      ^
+main.c(18): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   18 | void GPIO_init(){
+      | ^
+      | static 
+main.c(31): warning: no previous prototype for function 'TIM5_IRQHandler' [-Wmissing-prototypes]
+   31 |  void TIM5_IRQHandler(void) {
+      |       ^
+main.c(31): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   31 |  void TIM5_IRQHandler(void) {
+      |  ^
+      |  static 
+main.c(36): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   36 | void right() { // increase
+      |           ^
+      |            void
+main.c(38): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   38 |                 TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
+      |                                         ~ ^~~~~~~~~~
+main.c(36): warning: no previous prototype for function 'right' [-Wmissing-prototypes]
+   36 | void right() { // increase
+      |      ^
+main.c(36): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   36 | void right() { // increase
+      | ^
+      | static 
+main.c(41): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   41 | void left() {  // decrease   
+      |          ^
+      |           void
+main.c(43): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   43 |                 TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
+      |                                         ~ ^~~~~~~~~~
+main.c(41): warning: no previous prototype for function 'left' [-Wmissing-prototypes]
+   41 | void left() {  // decrease   
+      |      ^
+main.c(41): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   41 | void left() {  // decrease   
+      | ^
+      | static 
+main.c(46): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   46 | void up() {
+      |        ^
+      |         void
+main.c(48): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   48 |                 TIM2->CCR1 = (TIM2->ARR + STEP) * duty_cycle /100;
+      |                                                 ~ ^~~~~~~~~~
+main.c(46): warning: no previous prototype for function 'up' [-Wmissing-prototypes]
+   46 | void up() {
+      |      ^
+main.c(46): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   46 | void up() {
+      | ^
+      | static 
+main.c(51): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   51 | void down() {
+      |          ^
+      |           void
+main.c(53): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   53 |                 TIM2->CCR1 = (TIM2->ARR - STEP) * duty_cycle /100;
+      |                                                 ~ ^~~~~~~~~~
+main.c(51): warning: no previous prototype for function 'down' [-Wmissing-prototypes]
+   51 | void down() {
+      |      ^
+main.c(51): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   51 | void down() {
+      | ^
+      | static 
+main.c(65): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   65 |         TIM2->CCMR1 &= ~(3<<0);
+      |                     ~~ ^~~~~~~
+main.c(66): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   66 |         TIM2->CCMR1 &= ~(7<<4);
+      |                     ~~ ^~~~~~~
+main.c(78): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   78 |         TIM5->CCMR1 &= ~(3<<0);
+      |                     ~~ ^~~~~~~
+main.c(79): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   79 |         TIM5->CCMR1 &= ~(7<<4);
+      |                     ~~ ^~~~~~~
+main.c(129): warning: 'return' will never be executed [-Wunreachable-code-return]
+  129 |         return 0;
+      |                ^
+main.c(135): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
+  135 | void SysTick_Handler(void)
+      |      ^
+main.c(135): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  135 | void SysTick_Handler(void)
+      | ^
+      | static 
+main.c(10): warning: no previous extern declaration for non-static variable 'str' [-Wmissing-variable-declarations]
+   10 | char str[20];
+      |      ^
+main.c(10): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   10 | char str[20];
+      | ^
+31 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=10468 RO-data=1040 RW-data=24 ZI-data=1672  
+FromELF: creating hex file...
+".\Objects\lcd.axf" - 0 Error(s), 31 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -65,13 +212,13 @@ Package Vendor: Keil
 
    * Component: Keil::Device:STM32Cube Framework:Classic@1.8.1
       Include file:  MDK/Templates/Inc/stm32f4xx_it.h
-      Source file:   MDK/Templates/Src/stm32f4xx_it.c
-      Include file:  CMSIS/Driver/Config/RTE_Device.h
-      Source file:   MDK/Templates_LL/Src/main.c
-      Include file:  MDK/Templates/Inc/stm32f4xx_hal_conf.h
-      Include file:  MDK/Templates/Inc/main.h
-      Source file:   MDK/Templates/Src/stm32f4xx_hal_msp.c
       Source file:   MDK/Templates/Src/main.c
+      Source file:   MDK/Templates_LL/Src/main.c
+      Include file:  CMSIS/Driver/Config/RTE_Device.h
+      Source file:   MDK/Templates/Src/stm32f4xx_it.c
+      Include file:  MDK/Templates/Inc/main.h
+      Include file:  MDK/Templates/Inc/stm32f4xx_hal_conf.h
+      Source file:   MDK/Templates/Src/stm32f4xx_hal_msp.c
       Include file:  MDK/Templates_LL/Inc/main.h
 
    * Component: Keil::Device:STM32Cube HAL:Common@1.8.1
@@ -85,20 +232,20 @@ Package Vendor: Keil
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 
    * Component: Keil::Device:STM32Cube HAL:PWR@1.8.1
-      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
 
    * Component: Keil::Device:STM32Cube HAL:RCC@1.8.1
-      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
 
    * Component: Keil::Device:Startup@2.6.3
-      Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
       Source file:   MDK/Device/Source/ARM/STM32F401xx_OPT.s
       Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
+      Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f401xe.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
