@@ -89,8 +89,8 @@ main.c(36): warning: a function declaration without a prototype is deprecated in
    36 | void right() { // increase
       |           ^
       |            void
-main.c(38): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   38 |                 TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
+main.c(39): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   39 |                 TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
       |                                         ~ ^~~~~~~~~~
 main.c(36): warning: no previous prototype for function 'right' [-Wmissing-prototypes]
    36 | void right() { // increase
@@ -99,68 +99,74 @@ main.c(36): note: declare 'static' if the function is not intended to be used ou
    36 | void right() { // increase
       | ^
       | static 
-main.c(41): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   41 | void left() {  // decrease   
+main.c(42): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   42 | void left() {  // decrease   
       |          ^
       |           void
-main.c(43): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   43 |                 TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
+main.c(45): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   45 |                 TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
       |                                         ~ ^~~~~~~~~~
-main.c(41): warning: no previous prototype for function 'left' [-Wmissing-prototypes]
-   41 | void left() {  // decrease   
+main.c(42): warning: no previous prototype for function 'left' [-Wmissing-prototypes]
+   42 | void left() {  // decrease   
       |      ^
-main.c(41): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   41 | void left() {  // decrease   
+main.c(42): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   42 | void left() {  // decrease   
       | ^
       | static 
-main.c(46): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   46 | void up() {
+main.c(48): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   48 | void up() {
       |        ^
       |         void
-main.c(48): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   48 |                 TIM2->CCR1 = (TIM2->ARR + STEP) * duty_cycle /100;
+main.c(50): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   50 |                 TIM2->CCR1 = (TIM2->ARR + STEP) * duty_cycle /100;
       |                                                 ~ ^~~~~~~~~~
-main.c(46): warning: no previous prototype for function 'up' [-Wmissing-prototypes]
-   46 | void up() {
+main.c(48): warning: no previous prototype for function 'up' [-Wmissing-prototypes]
+   48 | void up() {
       |      ^
-main.c(46): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   46 | void up() {
+main.c(48): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   48 | void up() {
       | ^
       | static 
-main.c(51): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   51 | void down() {
+main.c(53): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   53 | void down() {
       |          ^
       |           void
-main.c(53): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   53 |                 TIM2->CCR1 = (TIM2->ARR - STEP) * duty_cycle /100;
+main.c(55): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   55 |                 TIM2->CCR1 = (TIM2->ARR - STEP) * duty_cycle /100;
       |                                                 ~ ^~~~~~~~~~
-main.c(51): warning: no previous prototype for function 'down' [-Wmissing-prototypes]
-   51 | void down() {
+main.c(53): warning: no previous prototype for function 'down' [-Wmissing-prototypes]
+   53 | void down() {
       |      ^
-main.c(51): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   51 | void down() {
+main.c(53): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   53 | void down() {
       | ^
       | static 
-main.c(65): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   65 |         TIM2->CCMR1 &= ~(3<<0);
+main.c(67): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   67 |         TIM2->CCMR1 &= ~(3<<0);
       |                     ~~ ^~~~~~~
-main.c(66): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   66 |         TIM2->CCMR1 &= ~(7<<4);
-      |                     ~~ ^~~~~~~
-main.c(78): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   78 |         TIM5->CCMR1 &= ~(3<<0);
+main.c(68): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   68 |         TIM2->CCMR1 &= ~(7<<4);
       |                     ~~ ^~~~~~~
 main.c(79): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
-   79 |         TIM5->CCMR1 &= ~(7<<4);
+   79 |         TIM5->CCMR1 &= ~(3<<0);
       |                     ~~ ^~~~~~~
-main.c(129): warning: 'return' will never be executed [-Wunreachable-code-return]
-  129 |         return 0;
+main.c(80): warning: implicit conversion changes signedness: 'int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+   80 |         TIM5->CCMR1 &= ~(7<<4);
+      |                     ~~ ^~~~~~~
+main.c(119): warning: result of comparison of 0 <= unsigned expression is always true [-Wtautological-unsigned-zero-compare]
+  119 |                                  if(0<=order && order >300){
+      |                                     ~^ ~~~~~
+main.c(92): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+   92 |         unsigned int order;
+      |                      ^
+main.c(141): warning: 'return' will never be executed [-Wunreachable-code-return]
+  141 |         return 0;
       |                ^
-main.c(135): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
-  135 | void SysTick_Handler(void)
+main.c(147): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
+  147 | void SysTick_Handler(void)
       |      ^
-main.c(135): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  135 | void SysTick_Handler(void)
+main.c(147): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  147 | void SysTick_Handler(void)
       | ^
       | static 
 main.c(10): warning: no previous extern declaration for non-static variable 'str' [-Wmissing-variable-declarations]
@@ -169,12 +175,12 @@ main.c(10): warning: no previous extern declaration for non-static variable 'str
 main.c(10): note: declare 'static' if the variable is not intended to be used outside of this translation unit
    10 | char str[20];
       | ^
-31 warnings generated.
+33 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=10468 RO-data=1040 RW-data=24 ZI-data=1672  
+Program Size: Code=10692 RO-data=1024 RW-data=20 ZI-data=1676  
 FromELF: creating hex file...
-".\Objects\lcd.axf" - 0 Error(s), 31 Warning(s).
+".\Objects\lcd.axf" - 0 Error(s), 33 Warning(s).
 
 <h2>Software Packages used:</h2>
 

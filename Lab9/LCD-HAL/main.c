@@ -35,11 +35,13 @@ void GPIO_init(){
 
 void right() { // increase
 		duty_cycle += 10;
+		if (duty_cycle >100) duty_cycle = 100;
 		TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
 } 
 
 void left() {  // decrease   
 		duty_cycle -= 10;
+		if (duty_cycle < 0) duty_cycle = 0;
 		TIM2->CCR1 = (TIM2->ARR * duty_cycle) / 100;
 } 
 
@@ -68,10 +70,9 @@ int main(void)
 	TIM2->CCR1 = 500;
 	TIM2->CCER |= (1<<0);
 	TIM2->CR1 = 1;
-	
-	//TIM2->DIER |= (1<<0);
-	//NVIC_EnableIRQ(TIM2_IRQn);
+
 //===========================
+	
 	TIM5->PSC = 16 - 1;
 	TIM5->ARR = MAX_COUNT - 1;
 	
@@ -87,43 +88,54 @@ int main(void)
 	NVIC_EnableIRQ(TIM5_IRQn);
 	__enable_irq();	
 	
-	
-	
-	while (1) {
-        sprintf(str, "%ldms", time);
-        LCD_Puts(0, 0, str);
 
-        if (mode == 0) {  // Blinking mode
-            sprintf(str, "Period:%dms", blink_period);
-            LCD_Puts(0, 1, str);
+	unsigned int order;
 
-            if ((GPIOC->IDR & (1 << 13)) == 0) {  // UP button pressed
-                up();
-            }
-            if ((GPIOC->IDR & (1 << 12)) == 0) {  // DOWN button pressed
-                down();
-            }
-						
-        } 
-				
-				else {  // Brightness adjustment mode
-            sprintf(str, "Duty cycle:%d", duty_cycle);
-            LCD_Puts(0, 1, str);
-
-            if ((GPIOC->IDR & (1 << 13)) == 0) {  // RIGHT button pressed
-                right();
-            }
-            if ((GPIOC->IDR & (1 << 12)) == 0) {  // LEFT button pressed
-                left();
-            }
-        }
-				
-				
-				if ((GPIOC->IDR & (1 << 11)) == 0) {  // SELECT button pressed
-						LCD_Puts(0, 1, "                ");
-            mode = ~mode;
-        }
-    }
+	 /* set up pin PA1 for analog input */
+		 RCC->AHB1ENR |= 1;         /* enable GPIOA clock */
+		 GPIOA->MODER |= (3 << 0); /* PA0 analog */
+		 
+	 /* setup ADC1 */
+		 RCC->APB2ENR |= (1 << 8); /* enable ADC1 clock */
+		 ADC1->SQR3 = 0; /* conversion sequence starts at ch 0 */
+		 ADC1->SQR1 = 0; /* conversion sequence length 1 */
+		 ADC1->CR2 |= (1<<0); /* enable ADC1 */
+		 
+		 while (1){
+		
+			   sprintf(str, "%ldms", time);
+         LCD_Puts(0, 0, str);
+			 
+         //LCD_Puts(0, 1, "                ");
+				 sprintf(str, "T:%dms", blink_period);
+         LCD_Puts(0, 1, str);	
+			   sprintf(str, "D:%d", duty_cycle);
+         LCD_Puts(10, 1, str);
+			 
+			   ADC1->CR2 |= ADC_CR2_SWSTART;     /* start a conversion */
+			   while((ADC1->SR & (1<<1))==0) {}  /* wait for conv complete */
+			   order = ADC1->DR & 0x0FFF;        /* read conversion result */
+				 
+				 if(0<=order && order >300){
+					 LCD_Puts(0, 1, "                ");
+					 right();
+				 }
+				 else if(300<=order && order<900){
+					 LCD_Puts(0, 1, "                ");
+					 up();
+				 }
+				 else if(900<=order && order<1600){
+					 LCD_Puts(0, 1, "                ");
+					 down();
+				 }
+				 else if(1600<=order && order<2500){
+					 LCD_Puts(0, 1, "                ");
+					 left();
+				 }
+				 else if(2500<=order && order<3500){
+					 //select : NOP
+				 }
+		 }
 	
 
 	return 0;

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lcd.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lcd.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Wed Jun  5 21:17:39 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Wed Jun  5 23:39:28 2024
 <BR><P>
 <H3>Maximum Stack Usage =        324 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -390,7 +390,7 @@ Global Symbols
 <P><STRONG><a name="[e9]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[78]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1161,36 +1161,36 @@ Global Symbols
 <P><STRONG><a name="[32]"></a>TIM5_IRQHandler</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, main.o(.text.TIM5_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f401xe.o(RESET)
 </UL>
-<P><STRONG><a name="[bc]"></a>down</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(.text.down))
+<P><STRONG><a name="[bd]"></a>down</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(.text.down))
 <BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[be]"></a>left</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(.text.left))
+<P><STRONG><a name="[be]"></a>left</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, main.o(.text.left))
 <BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[79]"></a>main</STRONG> (Thumb, 514 bytes, Stack size 24 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
+<P><STRONG><a name="[79]"></a>main</STRONG> (Thumb, 680 bytes, Stack size 32 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = main &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sprintf
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Puts
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;left
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;right
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;right
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_init
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[bd]"></a>right</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(.text.right))
+<P><STRONG><a name="[bb]"></a>right</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, main.o(.text.right))
 <BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bb]"></a>up</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(.text.up))
+<P><STRONG><a name="[bc]"></a>up</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(.text.up))
 <BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
